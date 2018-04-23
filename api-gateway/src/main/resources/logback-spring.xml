@@ -8,10 +8,10 @@
 	<appender name="FILE"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<!-- 文件路径 -->
-		<file>../app.log</file>
+		<file>../api_gateway.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<!-- 文件名称 -->
-			<fileNamePattern>../app.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<fileNamePattern>../api_gateway.%d{yyyy-MM-dd}.log</fileNamePattern>
 			<!-- 文件最大保存历史数量 -->
 			<MaxHistory>100</MaxHistory>
 		</rollingPolicy>

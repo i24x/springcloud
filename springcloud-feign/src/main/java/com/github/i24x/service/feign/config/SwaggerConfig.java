@@ -16,7 +16,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 	private static final String BASEPACKAGE = "com.github.i24x";
-
 	@Bean
 	public Docket createInstanceDocket() {
 		Docket docket = new Docket(DocumentationType.SWAGGER_2).select()
@@ -26,7 +25,7 @@ public class SwaggerConfig {
 	}
 
 	private ApiInfo createInstanceApiInfo() {
-		return new ApiInfoBuilder().title("SPRINGCLOUD环境搭建").description("用于Feign模块测试").version("1.0")
+		return new ApiInfoBuilder().title("SPRING CLOUD 环境搭建").description("用于Feign模块测试").version("1.0")
 				.termsOfServiceUrl("https://github.com/i24x")
 				.contact(new Contact("i24x", "https://github.com/i24x", "i24x610039525@163.com")).license("转载请标明出处")
 				.licenseUrl("https://github.com/i24x").build();

@@ -1,5 +1,10 @@
 ************************************************************************
 api-gateway
+eureka-server
+service-A
+==>service-B
+springcloud admin
+springcloud-commons
 项目地址：
 	https://github.com/i24x 
 	https://github.com/yc610039525

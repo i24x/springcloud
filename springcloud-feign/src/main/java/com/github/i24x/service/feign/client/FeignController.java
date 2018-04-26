@@ -12,23 +12,26 @@ import com.github.i24x.service.model.User;
 
 @RestController
 public class FeignController {
-  @Autowired
-  private UserFeginClient userFeginClient;
-  
-  @Autowired
-  private BookFeginClient bookFeginClient;
+//	private static final Logger logger = LoggerFactory.getLogger(FeignController.class);
+	@Autowired
+	private UserFeginClient userFeginClient;
 
-  @RequestMapping(value = "FeignController/updateDefaultUser" , method = RequestMethod.GET)
-  public String modUser(@RequestParam("name") String name) {
-    String string = this.userFeginClient.updateDefaultUser(name);
-    return string;
-  }
-  
-  @RequestMapping(value = "FeignController/orderBook" , method = RequestMethod.GET)
-  public @ ResponseBody Book orderBook(@RequestParam("name") String name){
-	  User user = new User();
-	  user.setName("小红");
-	  Book book = bookFeginClient.orderBook(user, name);
-	return book;
-  }
+	@Autowired
+	private BookFeginClient bookFeginClient;
+
+	@RequestMapping(value = "FeignController/updateDefaultUser", method = RequestMethod.GET)
+	public String modUser(@RequestParam("name") String name) {
+		String string = this.userFeginClient.updateDefaultUser(name);
+		return string;
+	}
+
+	@RequestMapping(value = "FeignController/orderBook", method = RequestMethod.GET)
+	public @ResponseBody
+	Book orderBook(@RequestParam("name") String name) {
+//		logger.info(name);
+		User user = new User();
+		user.setName("小红");
+		Book book = bookFeginClient.orderBook(user, name);
+		return book;
+	}
 }

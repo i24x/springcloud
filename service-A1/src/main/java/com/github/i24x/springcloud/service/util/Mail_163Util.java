@@ -41,7 +41,7 @@ public class Mail_163Util {
 	        Transport.send(msg); 
 	        return MailStatus.SUCCESS;
 		} catch (MessagingException e) {
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
 		}  
         return MailStatus.FAILED;
 	}

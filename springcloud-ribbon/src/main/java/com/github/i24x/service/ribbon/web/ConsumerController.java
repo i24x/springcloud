@@ -6,11 +6,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.alibaba.fastjson.JSON;
 import com.github.i24x.service.model.Email;
+import com.github.i24x.service.ribbon.service.EmailService;
 
 
 @RestController
@@ -27,6 +26,8 @@ public class ConsumerController {
 
     @Autowired
     private RestTemplate restTemplate;
+    @Autowired
+    private EmailService emailService;
     
 //    @Autowired  
 //    private LoadBalancerClient loadBalancerClient;  
@@ -45,12 +46,15 @@ public class ConsumerController {
 //		result = restTemplate.postForObject("http://service-A/EmailController/sendPrizeEmail",email, Email.class);
 		logger.info(JSON.toJSONString(result));
 		//@RequestParam JSON {} 被错误认为是占位符 
-//		result = restTemplate.getForObject("http://service-A/EmailController/sendPrizeEmailStr?email={email}",Email.class,JSON.toJSONString(email));
+		result = restTemplate.getForObject("http://service-A/EmailController/sendPrizeEmailStr?email={email}",Email.class,JSON.toJSONString(email));
 		logger.info(JSON.toJSONString(result));
 		//http://service-A/EmailController/doEmail/{title}
 		//@PathVariable
     	return restTemplate.getForEntity("http://service-A/EmailController/doEmail", String.class).getBody();
-    	
+    }
+    @RequestMapping(value = "/sendEmail", method = RequestMethod.GET)
+    public String sendEmail(@RequestParam("destnation") String destnation,@RequestParam("content") String content ){
+		return emailService.sendEmail(destnation, content);
     }
     
 }

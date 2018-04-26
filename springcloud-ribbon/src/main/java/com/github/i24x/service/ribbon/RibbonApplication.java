@@ -2,6 +2,7 @@ package com.github.i24x.service.ribbon;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
@@ -12,6 +13,7 @@ import com.netflix.loadbalancer.RandomRule;
 
 @SpringBootApplication
 @EnableDiscoveryClient
+@EnableCircuitBreaker
 public class RibbonApplication {
 	@Bean
 	@LoadBalanced

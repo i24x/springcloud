@@ -6,8 +6,7 @@ import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
-import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
-import org.springframework.cloud.netflix.turbine.EnableTurbine;
+import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -26,8 +25,9 @@ import org.springframework.web.client.RestTemplate;
 @EnableFeignClients({"com.github.i24x.springcloud.service.controller.fegin"}) //Fegin 必须定义basePackages
 @EnableDiscoveryClient //Eureka Client
 @EnableCircuitBreaker //Hystrix 服务降级 线程隔离 路由中断
-@EnableHystrixDashboard //Hystrix 监控面板
-@EnableTurbine //Hystrix 监控面板聚合
+//@EnableHystrixDashboard //Hystrix 监控面板
+//@EnableHystrix
+//@EnableTurbine //Hystrix 监控面板聚合
 public class StartupApplication_A {	
 	
 	@Bean

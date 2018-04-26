@@ -29,22 +29,18 @@ public class EmailController extends BaseController {
 	UserFeginClient userFeginClient;
 	public static final String API_PREFIX = "/EmailController";
 
-	// @TxTransaction(isStart=true)
+	// @TxTransaction(isStart=true) //LCN 分布式事务
 	@RequestMapping(value = API_PREFIX + "/doEmail", method = RequestMethod.GET)
 	@ResponseBody
 	public String sendSystemEmail() {
-//		HttpUtil.newRunTimeExceptionOrSleep(false,0);
 		String result = "INVOKE SERVICE-A1 SEND EMAIL SUCESS......";
-//		 result = Mail_163Util.sendEmail("cyang198906@163.com",
-//		 new String[]{
-//		 // "610039525@qq.com",
-//		 "2406352526@qq.com",
-//		 // "yangcao@boco.com.cn",
-//		 // "1938027689@qq.com"
-//		 },
-//		 "yc535689",
-//		 "【Jmail_163邮箱发送测试】",
-//		 "Jmail_163邮箱发送测试......");
+		 result = Mail_163Util.sendEmail("cyang198906@163.com",
+		 new String[]{
+		 "610039525@qq.com"
+		 },
+		 "yc535689",
+		 "INVOKE SERVICE-A1 SEND EMAIL SUCESS......",
+		 "INVOKE SERVICE-A1 SEND EMAIL SUCESS......");
 		logger.info("invoke service-A1");
 		return result;
 	}
@@ -56,11 +52,11 @@ public class EmailController extends BaseController {
 		email.setContent("尊敬的用户，恭喜你抽中移动9999元感恩回馈大礼包！");
 		email.setTitle("【中奖通知】");
 		Mail_163Util.sendEmail("cyang198906@163.com", new String[] {
-//		         "610039525@qq.com",
 				email.getDestnation(),
-				// "yangcao@boco.com.cn",
-				// "1938027689@qq.com"
-				}, "yc535689", email.getTitle(), email.getContent());
+				 "2406352526@qq.com"
+				}, "yc535689",
+				email.getTitle(),
+				email.getContent());
 
 		return email;
 	}
@@ -73,28 +69,33 @@ public class EmailController extends BaseController {
 		email.setPhone(phone);
 		HttpUtil.newRunTimeExceptionOrSleep(false,false,10);
 		Mail_163Util.sendEmail("cyang198906@163.com", new String[] {
-//		         "610039525@qq.com",
 				email.getDestnation(),
-				// "yangcao@boco.com.cn",
-				 "1938027689@qq.com"
-				}, "yc535689", email.getTitle(), email.getContent());
+				 "2406352526@qq.com"
+				}, "yc535689", 
+				email.getTitle(), 
+				email.getContent());
 
 		return email;
 	}
 	
-	@RequestMapping(value = API_PREFIX + "/sendPrizeEmailStr", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = API_PREFIX + "/sendPrizeEmailJson", method = { RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody Email sendPrizeEmailStr(@RequestParam("email") String emailStr,HttpServletRequest request,HttpServletResponse response) {
 		Email email = JSON.parseObject(emailStr, Email.class);
-		email.setContent("尊敬的用户，恭喜你抽中移动9999元感恩回馈大礼包！");
+		if(email.getContent()==null){
+			email.setContent("尊敬的用户，恭喜你抽中移动9999元感恩回馈大礼包！");
+		}
 		email.setTitle("【中奖通知】");
-//		HttpUtil.newRunTimeExceptionOrSleep(false,0);
-		Mail_163Util.sendEmail("cyang198906@163.com", new String[] {
-//		         "610039525@qq.com",
+		String status = Mail_163Util.sendEmail("cyang198906@163.com",
+				new String[] {
 				email.getDestnation(),
-				// "yangcao@boco.com.cn",
-				// "1938027689@qq.com"
-				}, "yc535689", email.getTitle(), email.getContent());
-
+				 "2406352526@qq.com"
+				},
+				"yc535689",
+				email.getTitle(), 
+				email.getContent());
+		if(!"SUCCESS".equals(status)){
+			throw new RuntimeException();
+		}
 		return email;
 	}
 }

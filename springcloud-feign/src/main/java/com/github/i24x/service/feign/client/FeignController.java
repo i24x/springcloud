@@ -1,5 +1,7 @@
 package com.github.i24x.service.feign.client;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,7 +14,7 @@ import com.github.i24x.service.model.User;
 
 @RestController
 public class FeignController {
-//	private static final Logger logger = LoggerFactory.getLogger(FeignController.class);
+	private static final Logger logger = LoggerFactory.getLogger(FeignController.class);
 	@Autowired
 	private UserFeginClient userFeginClient;
 
@@ -28,9 +30,9 @@ public class FeignController {
 	@RequestMapping(value = "FeignController/orderBook", method = RequestMethod.GET)
 	public @ResponseBody
 	Book orderBook(@RequestParam("name") String name) {
-//		logger.info(name);
+		logger.info("******************<>>>>>>>>>>>");
 		User user = new User();
-		user.setName("小红");
+		user.setName("苹果");
 		Book book = bookFeginClient.orderBook(user, name);
 		return book;
 	}

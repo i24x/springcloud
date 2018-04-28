@@ -16,5 +16,6 @@ import org.springframework.context.annotation.Configuration;
 public class StartupApplication_B {
 	public static void main(String[] args) {
 		SpringApplication.run(StartupApplication_B.class, args);
+//		URI.create("http://localhost:7082/api/v1/spans");
 	}
 }

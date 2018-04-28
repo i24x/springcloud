@@ -144,6 +144,7 @@
 			<artifactId>logstash-logback-encoder</artifactId>
 			<version>4.6</version>
 		</dependency>
+		<!-- 客户端使用 -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-config</artifactId>
